@@ -120,8 +120,10 @@ def pregunta_01():
     El archivo limpio debe escribirse en "files/output/solicitudes_de_credito.csv"
 
     """
+    nltk.download()
     nltk.download('stopwords')
     nltk.download('punkt')
+    nltk.download('punkt_tab')
     df = pd.read_csv("files/input/solicitudes_de_credito.csv", sep=";")
     df = df.drop(columns=['Unnamed: 0'])
     df = df.dropna()
