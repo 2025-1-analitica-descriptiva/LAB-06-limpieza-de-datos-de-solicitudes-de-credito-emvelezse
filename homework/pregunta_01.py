@@ -8,6 +8,7 @@ import pandas as pd
 import os
 import pandas as pd
 
+
 def create_normalized_key(df, column_name):
     """Cree una nueva columna en el DataFrame que contenga
     el key de la columna 'raw_text'"""
@@ -119,15 +120,14 @@ def pregunta_01():
     El archivo limpio debe escribirse en "files/output/solicitudes_de_credito.csv"
 
     """
-
+    nltk.download('stopwords')
+    nltk.download('punkt')
     df = pd.read_csv("files/input/solicitudes_de_credito.csv", sep=";")
     df = df.drop(columns=['Unnamed: 0'])
     df = df.dropna()
     df["comuna_ciudadano"] = df["comuna_ciudadano"].apply(lambda x: int(x))
     df["sexo"] = df["sexo"].str.lower()
     df["tipo_de_emprendimiento"] = df["tipo_de_emprendimiento"].str.lower()
-    nltk.download('stopwords')
-    nltk.download('punkt')
     df = create_normalized_key(df, "idea_negocio")
     df = generate_cleaned_text(df, "idea_negocio")
     df["idea_negocio"] = df["idea_negocio"].apply(eliminar_stopwords)
